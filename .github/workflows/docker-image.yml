@@ -37,4 +37,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/jobstream-front:main
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/jobstream-front:main
