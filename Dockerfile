@@ -1,6 +1,8 @@
 # Step 1: Build the application using a Node.js image
 FROM node:18-alpine AS build
 
+ENV HOST 0.0.0.0
+
 # Set the working directory
 WORKDIR /app
 
@@ -26,13 +28,13 @@ COPY --from=build /app/dist /usr/share/nginx/html
 # COPY nginx.conf /etc/nginx/nginx.conf
 
 COPY entrypoint.sh /entrypoint.sh
-
+COPY nginx.conf /etc/nginx/nginx.conf
 RUN cat /entrypoint.sh
 # Make entrypoint.sh executable
 RUN chmod +x /entrypoint.sh
 
 # Expose port 80 to make it accessible
-EXPOSE 80
+EXPOSE 8080
 
 # Use entrypoint.sh to start the server
 ENTRYPOINT ["/entrypoint.sh"]
